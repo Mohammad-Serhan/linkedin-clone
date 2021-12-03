@@ -1,60 +1,90 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Feed.css";
 import CreateIcon from "@material-ui/icons/Create";
 import ImageIcon from "@material-ui/icons/Image";
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
-import EventNoteIcon from '@material-ui/icons/EventNote';
-import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
+import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
+import EventNoteIcon from "@material-ui/icons/EventNote";
+import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import InputOption from "./InputOption";
 import Post from "./Post";
-// import { db } from "./firebase";
+import { db } from "./firebase";
+import firebase from "firebase";
 
 function Feed() {
-    // const [posts, setPosts] = useState([]);
+  const [input, setInput] = useState("");
+  const [posts, setPosts] = useState([]);
 
-    // useEffect(() => {
-    //     db.collection("posts").onSnapshot(snapshot => {
-    //         setPosts(snapshot.docs.map(doc => {
-    //             {
-    //                 id: doc.id;
-    //                 data: doc.data()
-    //             }
-    //         }))
-    //     })
-    // }, []);
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) => {
+      // onSnapshot gives a real-time listener connection to the database (everytime Posts gets added to, deletes, changes => it will give snapshot )
+      setPosts( 
+        // everytime posts change I'm going to update my posts state
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }) )
+      );
+    });
+  }, []);
 
+  const sendPost = (e) => {
+    e.preventDefault();
+    // add an object to the database
+    db.collection("posts").add({
+      name: "Mohammad Serhan",
+      description: "this is a test",
+      message: input,
+      photoUrl: "",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(), // if I am posting from Berlin my timestamp is different from yours
+    });
 
-    const sendPost = (e) => {
-        e.preventDefault();
-    }; 
+    setInput("");
+  };
 
   return (
     <div className="feed">
       <div className="feed__inputContainer">
         <div className="feed__input">
           <CreateIcon />
-          <form action="">
-            <input type="text" />
-            <button type="submit" onClick={sendPost} >Send</button>
+          <form>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <button type="submit" onClick={sendPost}>
+              Send
+            </button>
           </form>
         </div>
 
         <div className="feed__inputOptions">
-        <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" />
-        <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" />
-        <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" />
-        <InputOption Icon={CalendarViewDayIcon} title="Write article" color="#7FC15E" />
-         
+          <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" />
+          <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" />
+          <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" />
+          <InputOption
+            Icon={CalendarViewDayIcon}
+            title="Write article"
+            color="#7FC15E"
+          />
         </div>
       </div>
 
-
       {/* Posts */}
-      {/* {posts.map((post) => {
-          <Post />
-      })} */}
-    <Post name="Mohamad Serhan" description="This is a test" message="Wow this  worked"/>
+      {posts.map(( { id, data: { name, description, message, photoUrl } }) => 
+       (
+         <Post
+         key={id}
+         name={name}
+         description={description}
+         message={message}
+         photoUrl={photoUrl}
+       />
+        )
+      )
+      }
 
+     
     </div>
   );
 }
