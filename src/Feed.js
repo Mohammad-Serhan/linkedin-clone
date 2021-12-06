@@ -15,7 +15,7 @@ function Feed() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) => {
+    db.collection("posts").orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
       // onSnapshot gives a real-time listener connection to the database (everytime Posts gets added to, deletes, changes => it will give snapshot )
       setPosts( 
         // everytime posts change I'm going to update my posts state
@@ -71,7 +71,7 @@ function Feed() {
       </div>
 
       {/* Posts */}
-      {posts.map(( { id, data: { name, description, message, photoUrl } }) => 
+      {posts.map(( { id, data: { name, description, message, photoUrl }} ) => 
        (
          <Post
          key={id}

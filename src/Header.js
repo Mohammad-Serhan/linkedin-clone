@@ -1,16 +1,26 @@
 import React from "react";
-
 import "./Header.css";
 import HeaderOption from "./HeaderOption";
 import SearchIcon from "@material-ui/icons/Search";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
-import ChatIcon from '@material-ui/icons/Chat';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
+import ChatIcon from "@material-ui/icons/Chat";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+
+import { logout } from "./features/userSlice";
+import { auth } from "./firebase";
+import { useDispatch } from "react-redux";
 
 function Header() {
+  const dispatch = useDispatch();
+
+  const logoutOfApp = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
+
   return (
     <div className="header">
       <div className="header__left">
@@ -20,11 +30,9 @@ function Header() {
         />
         <div className="header__search">
           <SearchIcon />
-          <input type="text" />
+          <input type="text" placeholder="Search" />
         </div>
       </div>
-
-
 
       <div className="header__right">
         <HeaderOption Icon={HomeIcon} title="Home" />
@@ -32,7 +40,11 @@ function Header() {
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
         <HeaderOption Icon={ChatIcon} title="Messaging" />
         <HeaderOption Icon={NotificationsIcon} title="Notification" />
-        <HeaderOption avatar="https://media-exp1.licdn.com/dms/image/C4D03AQGpwmcjfbTQZg/profile-displayphoto-shrink_400_400/0/1636660859010?e=1643241600&v=beta&t=K7OTt98DjKvEQDpIAQgDWhe7TFasaRPx7nIAg2qibbQ" title="me"/>
+        <HeaderOption
+          avatar="https://media-exp1.licdn.com/dms/image/C4D03AQGpwmcjfbTQZg/profile-displayphoto-shrink_400_400/0/1636660859010?e=1643241600&v=beta&t=K7OTt98DjKvEQDpIAQgDWhe7TFasaRPx7nIAg2qibbQ"
+          title="me"
+          onClick={logoutOfApp}
+        />
       </div>
     </div>
   );
