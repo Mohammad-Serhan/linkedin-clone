@@ -43,12 +43,26 @@ function Login() {
 
   const loginToApp = (e) => {
     e.preventDefault();
+
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userAuth) => {
+        dispatch(
+          login({
+            uid: userAuth.user.uid,
+            displayName: userAuth.user.displayName,
+            email: userAuth.user.email,
+            photoURL: userAuth.user.photoURL,
+          })
+        );
+      })
+      .catch((error) => alert(error));
   };
 
   return (
     <div className="login">
       <img
-        src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Logo.svg.original.svg"
+        src="https://www.freepnglogos.com/uploads/linkedin-logo-transparent-png-16.png"
         alt=""
       />
 

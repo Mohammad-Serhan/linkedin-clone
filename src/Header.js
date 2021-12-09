@@ -25,7 +25,7 @@ function Header() {
     <div className="header">
       <div className="header__left">
         <img
-          src="https://cdn-icons.flaticon.com/png/128/3536/premium/3536505.png?token=exp=1637592461~hmac=248e467f792b56527f0bb12bbe3391f8"
+          src="https://www.freeiconspng.com/uploads/linkedin-logo-3.png"
           alt=""
         />
         <div className="header__search">
@@ -40,11 +40,7 @@ function Header() {
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
         <HeaderOption Icon={ChatIcon} title="Messaging" />
         <HeaderOption Icon={NotificationsIcon} title="Notification" />
-        <HeaderOption
-          avatar="https://media-exp1.licdn.com/dms/image/C4D03AQGpwmcjfbTQZg/profile-displayphoto-shrink_400_400/0/1636660859010?e=1643241600&v=beta&t=K7OTt98DjKvEQDpIAQgDWhe7TFasaRPx7nIAg2qibbQ"
-          title="me"
-          onClick={logoutOfApp}
-        />
+        <HeaderOption avatar={true} title="me" onClick={logoutOfApp} />
       </div>
     </div>
   );
