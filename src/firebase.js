@@ -1,12 +1,14 @@
 import firebase from "firebase";
 
+require("dotenv").config();
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDJGTVYydKHGvAYLc-2jNnj1Yc2dUmJJbU",
-  authDomain: "linkedin-clone-d767d.firebaseapp.com",
-  projectId: "linkedin-clone-d767d",
-  storageBucket: "linkedin-clone-d767d.appspot.com",
-  messagingSenderId: "101639651305",
-  appId: "1:101639651305:web:1efa67e38e3f2e31965578",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig); // this line connects everything, coonect to database,
