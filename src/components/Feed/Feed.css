@@ -42,3 +42,9 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+@media screen and (min-device-width: 360px) and (max-device-width: 800px) {
+  .feed {
+    flex: 1;
+  }
+}

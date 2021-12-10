@@ -27,11 +27,11 @@ function Widgets() {
       </div>
 
       {newArticle("Serhan React is back", "Top news -9099 readers")}
-      {newArticle("Coronavirus: UK updates", "Top news -9099 readers")}
+      {newArticle("Coronavirus: Lebanon updates", "Top news -452 readers")}
       {newArticle("Serhan React is back", "Top news -9099 readers")}
-      {newArticle("Coronavirus: UK updates", "Top news -9099 readers")}
+      {newArticle("most new Tech", "Top news -223 readers")}
       {newArticle("Serhan React is back", "Top news -9099 readers")}
-      {newArticle("Coronavirus: UK updates", "Top news -9099 readers")}
+      {newArticle("most new Tech", "Top news -111 readers")}
     </div>
   );
 }

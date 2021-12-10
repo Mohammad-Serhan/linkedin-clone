@@ -12,3 +12,10 @@
   margin-right: 20px;
   max-width: 1200px;
 }
+
+@media screen and (min-device-width: 360px) and (max-device-width: 800px) {
+  .app__body {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
