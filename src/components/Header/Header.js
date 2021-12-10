@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-import HeaderOption from "./HeaderOption";
+import HeaderOption from "../Header Options/HeaderOption";
 import SearchIcon from "@material-ui/icons/Search";
 
 import HomeIcon from "@material-ui/icons/Home";
@@ -9,8 +9,8 @@ import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 import ChatIcon from "@material-ui/icons/Chat";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-import { logout } from "./features/userSlice";
-import { auth } from "./firebase";
+import { logout } from "../../features/userSlice";
+import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
 
 function Header() {
